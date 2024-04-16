@@ -1,0 +1,30 @@
+{
+    "state": {
+        "hand": "HK",
+        "public_card": null,
+        "all_chips": [
+            1,
+            2
+        ],
+        "my_chips": 1,
+        "legal_actions": [
+            "call",
+            "raise",
+            "fold"
+        ],
+        "current_player": 0
+    },
+    "lastMoveAI": "check",
+    "bot_card": null,
+    "player_hand": [
+        "H",
+        "K"
+    ],
+    "public_card": null,
+    "pot": 3,
+    "result": null,
+    "reward": null,
+    "action": null,
+    "newRound": false,
+    "suggested_action": "call"
+}

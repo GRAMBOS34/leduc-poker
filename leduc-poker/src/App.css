@@ -1,0 +1,109 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.container {
+  position: absolute;
+  height: 90px;
+  width: 100%;
+  background-color: #202225; 
+}
+
+.container h2{
+  font-size: 2em;
+}
+
+.container button{
+  position: absolute;
+  left: 1.5%;
+  top: 25%;
+  margin-right: 5px; 
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 5em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.container button:hover {
+  border-color: white;
+}
+
+.tutorials{
+  position: absolute;
+  height: 90px;
+  width: 100%;
+} 
+
+.titleText{
+  position: absolute;
+  right: 25px;
+  top: -5%;
+}
+
+.popup {
+  position: fixed; /* Stays on top of other content */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);  /* Center the popup */
+  background-color: #202225;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); /* Optional shadow effect */
+  width: 60%;
+  height: fit-content;
+  z-index: 1000;
+  text-align: left;
+}
+
+.popup button{
+  position: relative;
+  top: 1.5em;
+  left: 2em;
+  margin-right: 5px; 
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 5em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+img {
+  border-radius: 10px;
+  height: 15em;
+  aspect-ratio: auto;
+}
+
+.choices{
+  position: absolute;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
+.LeducHoldem button{
+  margin-left: 3px;
+  margin-right: 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  height: 3em;
+  width: 10em; 
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
