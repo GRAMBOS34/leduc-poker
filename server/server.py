@@ -4,7 +4,7 @@ import json
 from updateJsonFile import update_json_file
 
 app = Flask(__name__)
-CORS(app, resources={r'/update/*', r'/show/*', r'/action'})
+CORS(app, resources={r'/update/*', r'/action', r'/data'})
 
 #Total player statistics
 wins = 0
@@ -63,18 +63,24 @@ def newRound():
 
     return jsonify({"message": "Action successfully updated"})
 
+@app.route('/data', methods=["POST"])
+def updateData():
+  action = request.json.get('action')
+  with open('server/data.json', "r+") as file:
+    data = json.load(file)
 
-@app.route('/show/all', methods=["GET"])
-def show_all():
-    stats = {
-        "Total wins": wins,
-        "Total losses": losses,
-        "Total draws": draws,
-        "Total suggestions taken": suggestionsTaken,
-        "Total suggestions ignored": suggestionsIgnored
-    }
+    if action == 'call':
+       data["raise"] += 1
 
-    return jsonify(stats)
+    else:
+       data[action] += 1
+
+    file.truncate(0)
+    file.seek(0)
+
+    json.dump(data, file, indent=4)
+
+  return jsonify({"message": "Action successfully updated"})
 
 #*This is how we get data from the react file
 """

@@ -1,6 +1,6 @@
 {
     "state": {
-        "hand": "HJ",
+        "hand": "HQ",
         "public_card": null,
         "all_chips": [
             1,
@@ -18,7 +18,7 @@
     "bot_card": null,
     "player_hand": [
         "H",
-        "J"
+        "Q"
     ],
     "public_card": null,
     "pot": 3,
@@ -27,5 +27,5 @@
     "action": null,
     "actionRepeat": false,
     "newRound": false,
-    "suggested_action": "raise"
+    "suggested_action": "call"
 }

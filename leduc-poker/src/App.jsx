@@ -38,9 +38,34 @@ function LeducHoldem() {
     highlightBtn: null
   });
 
+  const collectData = async (action) => {
+    try {
+      const response = await fetch('http://localhost:5000/data', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json'},
+        body: JSON.stringify({ action }), // Send updated value in JSON
+      });
+  
+      if (response.ok) {
+        console.log('Value updated successfully!');
+      } else {
+        console.error('Error updating value:', await response.text());
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const handleBet = () => {
     getData(); //so it updates at every button press
     const action = "raise";
+    collectData(action);
+    if (action != botState.suggested_action){
+      collectData('suggestionIgnored');
+    };
+    if (action == botState.suggested_action){
+      collectData('suggestionTaken');
+    };
     try {
       const response = fetch('http://localhost:5000/action', {
         method: 'POST',
@@ -67,6 +92,13 @@ function LeducHoldem() {
   const handleCheck = () => {
     getData(); //so it updates at every button press
     const action = "call";
+    collectData(action);
+    if (action != botState.suggested_action){
+      collectData('suggestionIgnored');
+    };
+    if (action == botState.suggested_action){
+      collectData('suggestionTaken');
+    };
     try {
       const response = fetch('http://localhost:5000/action', {
         method: 'POST',
@@ -92,6 +124,13 @@ function LeducHoldem() {
   const handleFold = async () => {
     getData(); //so it updates at every button press
     const action = "fold";
+    collectData(action);
+    if (action != botState.suggested_action){
+      collectData('suggestionIgnored');
+    };
+    if (action == botState.suggested_action){
+      collectData('suggestionTaken');
+    };
     try {
       const response = await fetch('http://localhost:5000/action', {
         method: 'POST',
@@ -149,6 +188,7 @@ function LeducHoldem() {
   const handleNextRound = async () => {
     console.log('handleNextRound')
     getData();
+    collectData(botState.result);
     const action = true;
     try {
       const response = await fetch('http://localhost:5000/update/new_round', {

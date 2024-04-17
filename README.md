@@ -32,7 +32,7 @@ cd leduc-poker
 npm install
 ```
 
-### Step 3 - Running them - **RUN THESE COMMANDS IN SEPERATE TERMINALS**
+### Step 3 - Running them - ***RUN THESE COMMANDS IN SEPERATE TERMINALS***
 
 a) To run the python apps
 
@@ -62,3 +62,9 @@ npm run dev
 # Other things to keep in mind
 
 ### 1) Only clear the data.json for every new person otherwise don't
+
+> Do this by running the resetJson.py script
+
+### 2) This is God's worst code so don't expect it to be really good
+
+### 3) This is just for a mini research paper so I kinda didn't care what I did here tbh
