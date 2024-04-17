@@ -23,7 +23,9 @@ function LeducHoldem() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [roundNum, setRoundNum] = useState(0);
+  const [isHighlightedCall, setIsHighlightedCall] = useState(false);
+  const [isHighlightedFold, setIsHighlightedFold] = useState(false);
+  const [isHighlightedRaise, setIsHighlightedRaise] = useState(false);
 
   const [gameState, setGameState] = useState({
     pot: botState.pot,
@@ -37,6 +39,7 @@ function LeducHoldem() {
   });
 
   const handleBet = () => {
+    getData(); //so it updates at every button press
     const action = "raise";
     try {
       const response = fetch('http://localhost:5000/action', {
@@ -62,6 +65,7 @@ function LeducHoldem() {
   }; 
 
   const handleCheck = () => {
+    getData(); //so it updates at every button press
     const action = "call";
     try {
       const response = fetch('http://localhost:5000/action', {
@@ -86,6 +90,7 @@ function LeducHoldem() {
   };
   
   const handleFold = async () => {
+    getData(); //so it updates at every button press
     const action = "fold";
     try {
       const response = await fetch('http://localhost:5000/action', {
@@ -119,11 +124,11 @@ function LeducHoldem() {
       }
     } catch (error) {
       if (botState.result != null){
-      setGameState({
-        ...gameState,
-        gameOver: true
-      })
-    }
+        setGameState({
+          ...gameState,
+          gameOver: true
+        })
+      }
     }
   };
 
@@ -143,6 +148,7 @@ function LeducHoldem() {
 
   const handleNextRound = async () => {
     console.log('handleNextRound')
+    getData();
     const action = true;
     try {
       const response = await fetch('http://localhost:5000/update/new_round', {
@@ -255,8 +261,29 @@ function LeducHoldem() {
       return Back;
     }
   };
-
+  
   const getData = async () => {
+    let assistBotAction = botState.suggested_action
+    
+    if (assistBotAction == 'call'){
+      console.log('call');
+      setIsHighlightedCall(true);
+      setIsHighlightedRaise(false);
+      setIsHighlightedFold(false);
+    }
+    if (assistBotAction == 'raise'){
+      console.log('raise');
+      setIsHighlightedCall(false);
+      setIsHighlightedRaise(true);
+      setIsHighlightedFold(false);
+    }
+    if (assistBotAction == 'fold'){
+      console.log('fold');
+      setIsHighlightedCall(false);
+      setIsHighlightedRaise(false);
+      setIsHighlightedFold(true);
+    }
+
     if (botState.result != null){
       setGameState({
         ...gameState,
@@ -278,7 +305,7 @@ function LeducHoldem() {
       botCard: Back //for now
     });
 
-    console.log(botState.state);
+    //console.log(botState);
   };
 
   const {gameOver, isBettingRound, playerCard} = gameState
@@ -455,9 +482,20 @@ function LeducHoldem() {
                     position: 'absolute',
                     bottom: '25%'
                   }}>
-                    <button onClick={handleBet}>Bet</button>
-                    <button onClick={handleCheck}>Call (Match bet)</button>
-                    <button onClick={handleFold}>Fold (Give up)</button>
+                    <button 
+                      id='raise'
+                      className={isHighlightedRaise ? 'highlighted-button' : ''}
+                      onClick={handleBet}>Raise</button>
+
+                    <button 
+                      id='call'
+                      className={isHighlightedCall ? 'highlighted-button' : ''}
+                      onClick={handleCheck}>Call (Match bet)</button>
+
+                    <button 
+                      id='fold'
+                      className={isHighlightedFold ? 'highlighted-button' : ''}
+                      onClick={handleFold}>Fold (Give up)</button>
                   </div> 
                 )}
       

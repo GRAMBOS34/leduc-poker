@@ -107,3 +107,9 @@ img {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
+.LeducHoldem .highlighted-button {
+  background-color: #ff2121;
+  border-color: white; 
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out; 
+}

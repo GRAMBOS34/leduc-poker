@@ -47,6 +47,10 @@ def check_update(filename):
 
                 if state == previousUpdate: 
                     return False
+                
+                if state["actionRepeat"] == True:
+                    update_json_file(filename=filename, key='actionRepeat', new_value=False)
+                    return True
             
                 previousUpdate = state
                 return True
@@ -76,6 +80,7 @@ def get_action(filename):
             if filename.endswith('.json'):  # Check for JSON file
                 action_data = json.load(f)
                 previousUpdate = action_data['action']
+                print(action_data['action'])
 
                 if action_data['action'] == 'call':
                     try:
@@ -96,6 +101,5 @@ def get_action(filename):
             else:  # Assume text file with action on a single line
                 action_string = f.read().strip()
                 return int(action_string)
-    except FileNotFoundError:
-        print(f"Error: File not found: {filename}")
+    except ValueError:
         return None  # Or handle the error differently

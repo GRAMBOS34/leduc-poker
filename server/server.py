@@ -13,20 +13,38 @@ draws = 0
 suggestionsTaken = 0
 suggestionsIgnored = 0
 FILENAME = 'server/state.json'
+callNum = 0
 
 #Gets the action from the app
 @app.route('/action', methods=["POST"])
 def update_action():
-  action = request.json.get('action')
-  with open(FILENAME, "r+") as file:
-      data = json.load(file)
+  global callNum
+  callNum += 1
+  if callNum >= 2:
+    action = request.json.get('action')
+    with open(FILENAME, "r+") as file:
+        data = json.load(file)
 
-      data["action"] = action
+        data["action"] = action
+        data["actionRepeat"] = True
 
-      file.truncate(0)
-      file.seek(0)
+        file.truncate(0)
+        file.seek(0)
 
-      json.dump(data, file, indent=4)
+        json.dump(data, file, indent=4)
+
+  else:
+    action = request.json.get('action')
+    with open(FILENAME, "r+") as file:
+        data = json.load(file)
+
+        data["action"] = action
+        data["actionRepeat"] = True
+
+        file.truncate(0)
+        file.seek(0)
+
+        json.dump(data, file, indent=4)
 
   return jsonify({"message": "Action successfully updated"})
 
