@@ -9,6 +9,7 @@
 # Steps to make this thing run
 
 _I didnt make this easier to run because i dont know how to so here you go_
+_I really wish i couldve made this easier but since i procrastinated for weeks on end couldnt_
 
 ### Step 1 - Make sure you have pip, python, and npm installed
 
