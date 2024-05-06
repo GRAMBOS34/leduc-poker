@@ -1,4 +1,4 @@
-# Leduc Poker - For Practical Research 1
+# Leduc Poker - God's worst implementation with spaghetti code that would make the italians cry
 
 ## Library used - RLCard
 
